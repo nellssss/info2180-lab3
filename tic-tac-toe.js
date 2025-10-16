@@ -21,5 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     })
 
-});
+    //Hovering
+    brd.forEach(div => {
+        div.addEventListener('mouseover', () => {
+        div.classList.add('hover');
+    });
+        div.addEventListener('mouseout', () => {
+        div.classList.remove('hover');
+    });
+    });
 
+
+});
