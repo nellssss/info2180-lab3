@@ -14,12 +14,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.classList.add(mv === 'X' ? ('square','X'):('square','O'));
                 
                 plays[player] = mv; //record player moves
-                mv = mv === 'X' ? 'O':'X';
 
-                //console.log(plays);
+                //Checking for winner
+                const winner = theWinner();
+                if (winner) {
+                    const newStatus = document.getElementById('status');
+                    newStatus.textContent = `Congratulations! ${winner} is the Winner!`;
+                    newStatus.classList.add('you-won');
+                } else {
+                    mv = mv === 'X' ? 'O' : 'X'; 
+                }
             }
-        })
-    })
+        });
+    });
+            
 
     //Hovering
     brd.forEach(div => {
@@ -31,5 +39,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     });
 
+    //Status winner
+    const wins = [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,4,8],
+        [2,4,6]
+    ]
 
+    function theWinner() {
+        for (let [a,b,c] of wins) {
+            if (plays[a] && plays[a] === plays[b] && plays[a] === plays[c]) {
+                return plays[a];
+            }
+        }
+        return null;
+    }
 });
